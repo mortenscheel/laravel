@@ -13,7 +13,7 @@ The init script does the following:
 4. Generate application key
 5. Initialize an sqlite database file (requires sqlite - otherwise edit the database configuration before running the script).
 6. Migrate database tables.
-7. Seed an "admin" Role and an Admin user.
+7. Seed an "admin" Role and an Admin user (default admin@admin.com / password).
 
 ## Packages
 * barryvdh/laravel-debugbar (dev only)
