@@ -17,15 +17,17 @@ class AdminUserSeeder extends Seeder
         try {
             /** @var \App\Models\User $user */
             $user = factory(App\Models\User::class)->create([
-                    "name" => "Morten Scheel",
-                    "email" => "ms@findforsikring.dk",
-                    "password" => bcrypt(env('ADMIN_PWD', 'password'))]
+                    "name" => env('ADMIN_NAME', 'Administrator'),
+                    "email" => env('ADMIN_EMAIL', 'admin@admin.com'),
+                    "password" => bcrypt(env('ADMIN_PASSWORD', 'password'))]
             );
             $role = \App\Models\Role::whereName('admin');
             if ($role->count()){
                 $role = $role->get()->first();
                 $user->roles()->save($role);
             }
+            $this->command->info("Seeded admin user");
+            dump($user);
         } catch (\Illuminate\Database\QueryException $exception) {
 
         }

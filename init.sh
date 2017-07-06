@@ -9,4 +9,6 @@ echo "Installed composer packages"
 php artisan key:generate
 touch ./database/database.sqlite > /dev/null
 echo "Added sqlite DB"
-php artisan migrate --seed
+php artisan migrate > /dev/null
+echo "Migrated DB tables"
+php artisan db:seed
