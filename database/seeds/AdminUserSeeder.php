@@ -27,7 +27,6 @@ class AdminUserSeeder extends Seeder
                 $user->roles()->save($role);
             }
             $this->command->info("Seeded admin user");
-            dump($user);
         } catch (\Illuminate\Database\QueryException $exception) {
 
         }

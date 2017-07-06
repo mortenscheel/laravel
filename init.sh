@@ -8,3 +8,5 @@ php artisan key:generate
 touch ./database/database.sqlite
 php artisan migrate
 php artisan db:seed
+npm install
+npm run dev
