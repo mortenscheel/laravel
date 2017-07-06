@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome'); // Landing page
+});
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function (){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('role:admin');
 });

@@ -41,6 +41,24 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+/**
+ * Configure Monolog.
+ */
+$app->configureMonologUsing(function (Monolog\Logger $monolog) {
+    // Make different log files for web and cli to avoid permission problems
+    $logFileIdentifier = php_sapi_name();
+    if ($logFileIdentifier != 'cli') {
+        $logFileIdentifier = 'web';
+    }
+    $filename = storage_path("logs/laravel-{$logFileIdentifier}.log");
+    $handler = new Monolog\Handler\RotatingFileHandler($filename, 7);
+    $format = "[%datetime%] %channel%.%level_name%: %message% %context% %extra%\n";
+    // allow inline line-breaks and ignore empty context info
+    $formatter = new \Monolog\Formatter\LineFormatter($format, null, true, true);
+    $handler->setFormatter($formatter);
+    $monolog->pushHandler($handler);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
